@@ -4,7 +4,7 @@
 #
 # ~> sh rc_cleanup.sh <service> <ticket number>
 #
-# Allowed Services: blog, pres, callback 
+# Allowed Services: blog, pres, call 
 
 SERVICE=$1
 TICKET=$2
@@ -17,8 +17,8 @@ elif [ ${SERVICE} == "pres" ]; then
 	for i in $(svn list https://vault.internal.compendiumblogware.com/svn/presentation/application/tags | grep "\-RC"); do
 		svn rm -m "RC Cleanup (${i}), refs #${TICKET}" https://vault.internal.compendiumblogware.com/svn/presentation/application/tags/${i}
 	done
-elif [ ${SERVICE} == "callback" ]; then
-	for i in $(svn list https://vault.internal.compendiumblogware.com/svn/presentation/application/tags | grep "\-RC"); do
+elif [ ${SERVICE} == "call" ]; then
+	for i in $(svn list https://vault.internal.compendiumblogware.com/svn/callback/application/tags | grep "\-RC"); do
 		svn rm -m "RC Cleanup (${i}), refs #${TICKET}" https://vault.internal.compendiumblogware.com/svn/callback/application/tags/${i}
 	done
 fi

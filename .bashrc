@@ -96,7 +96,9 @@ On_IWhite='\e[0;107m'   # White
 
 #PS1='\[\e[m\n\e[1;30m\][$$:$PPID \j:\!\[\e[1;30m\]]\[\e[0;36m\] \T \d \[\e[1;30m\][\[\e[1;34m\]\u@\H\[\e[1;30m\]:\[\e[0;37m\]${SSH_TTY} \[\e[0;32m\]+${SHLVL}\[\e[1;30m\]] \[\e[m\n\e[1;30m\]\w\[\e[1;30m\] \n($SHLVL:\!) \[\e[0m\]'
 
-PS1="\[$Cyan\] \T \d \[$BBlack\][\[$BPurple\]\u\[$BBlue\]@\H\[$BBlack\]:\[$BYellow\]${SSH_TTY} \[$Green\]+${SHLVL}\[$BBlack\]] \[\e[m\n$BBlack\]\[$BBlack\]($SHLVL:\!) \w \[$Color_Off\]-> "
+PS1="\[$Cyan\]\d \[$BCyan\]\t \[$BBlack\][\[$BPurple\]\u\[$BBlue\]@\H\[$BBlack\]:\[$BYellow\]${SSH_TTY} \[$Green\]+${SHLVL}\[$BBlack\]] \[\e[m\n$BBlack\]\[$BBlack\]($SHLVL:\!) \[$Red\]\w \[$Color_Off\]-> "
+
+EC2_CURRENT_LIST="~/Documents/FullServerList.csv"
 
 servs() {
 	grep "$*" $EC2_CURRENT_LIST

@@ -7,8 +7,15 @@ alias lr='ls -tRFh'   #sorted by date,recursive,show type,human readable
 alias lt='ls -ltFh'   #long list,sorted by date,show type,human readable
 
 ##Set environment for creating Amazon Instanced in Production or Test ENV
-alias set-prod='. ~/.ec2/set-prod-env'
-alias set-test='. ~/.ec2/set-test-env'
+set-prod() {
+	. ~/.ec2/set-prod-env.sh
+	ssh-add $EC2_SSH_ID
+}
+
+set-test() {
+	. ~/.ec2/set-test-env.sh
+	ssh-add $EC2_SSH_ID
+}
 
 ##Set Screen Shortcuts
 #alias screen-test='screen -c .screenrc-test'
@@ -17,6 +24,9 @@ alias set-test='. ~/.ec2/set-test-env'
 
 #Setting Amazon EC2 Tools location Production
 set-prod
+
+#Shortcuts
+alias hub='ssh hub'
 
 # Reset
 Color_Off='\e[0m'       # Text Reset
@@ -98,13 +108,22 @@ On_IWhite='\e[0;107m'   # White
 
 PS1="\[$Cyan\]\d \[$BCyan\]\t \[$BBlack\][\[$BPurple\]\u\[$BBlue\]@\H\[$BBlack\]:\[$BYellow\]${SSH_TTY} \[$Green\]+${SHLVL}\[$BBlack\]] \[\e[m\n$BBlack\]\[$BBlack\]($SHLVL:\!) \[$Red\]\w \[$Color_Off\]-> "
 
-EC2_CURRENT_LIST="~/Documents/FullServerList.csv"
+EC2_CURRENT_LIST=~/Documents/FullServerList.csv
 
 servs() {
 	grep "$*" $EC2_CURRENT_LIST
 }
 servlist() {
-	cat $EC2_CURRENT_LIST |awk -F, '{print $1 " " $2}'
+	cat $EC2_CURRENT_LIST #|awk -F, '{print $1 " " $2}'
+}
+
+sshconnect() {
+	server=$1
+	ssh ec2-user@${server}
+	if [ $? -ne 0 ]; then
+		echo ${server}
+		ssh root@${server}
+	fi
 }
 
 servconnect() {
